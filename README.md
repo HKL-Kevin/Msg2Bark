@@ -8,7 +8,7 @@
 
 配置文件地址：`/data/adb/modules/Msg_2_Bark/config.conf`
 
-```yara
+```toml
 #所有配置参数修改即时生效，无需重启！！！日志文件log.log
 
 # Bark服务器地址 +「/push」，最后面的「/push」是推送时调用的接口名称
