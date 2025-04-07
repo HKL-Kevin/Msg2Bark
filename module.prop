@@ -3,4 +3,4 @@ name=Msg2Bark
 version=20250407
 versionCode=20250407
 author=Kevin
-description=未读短信自动转发至Bark
+description=未读短信自动转发至Bark,开源仓库https://github.com/HKL-Kevin/Msg2Bark
