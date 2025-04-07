@@ -9,7 +9,7 @@ sleep 1
 up=1
 while :;
 do
-"$MODDIR/mf.sh" > /dev/null 2>&1
+"$MODDIR/mf.sh" > "$MODDIR/run.log" 2>&1
 up="$(( $up + 1 ))"
 sleep 1
 done
