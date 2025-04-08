@@ -33,3 +33,4 @@ call_db_path=/data/data/com.android.providers.contacts/databases/calllog.db
 
 - @top大佬（酷安）的 [消转模块](https://github.com/410154425/Message_Forwarding)
 - [Bark官方说明文档](https://bark.day.app/#/?id=bark)
+- [读取数据库可能需要依赖于sqlite3-magisk-module模块](https://github.com/rojenzaman/sqlite3-magisk-module)，已内置到本模块。

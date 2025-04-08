@@ -37,9 +37,7 @@ bark_push() {
 forwarding(){
         # 执行查询并将结果逐行存储到变量
         MSG_DB_PATH="$(echo "$config_conf" | egrep '^msg_db_path=' | sed -n 's/msg_db_path=//g;$p')"
-        if [ ! -f $MSG_DB_PATH ];then
-        	echo "$(date +%F_%T) 通话记录数据库不存在，请正确配置 $MSG_DB_PATH" >> "$MODDIR/log.log"
-        else
+        if [ -f "$MSG_DB_PATH" ]; then
         	sqlite3 -separator $'\t' "$MSG_DB_PATH" "SELECT _id, address, date, read FROM sms WHERE type = 1 AND read = 0 LIMIT 1;" | while IFS=$'\t' read -r sms_id address date is_read; do
 			# 将日期从毫秒转换为秒，并格式化为可读的日期格式
 			formatted_date=$(date -d @$((date / 1000)) "+%Y-%m-%d %H:%M:%S")
@@ -50,16 +48,15 @@ forwarding(){
 			# 更新为已读状态
 			sqlite3 "$MSG_DB_PATH" "UPDATE sms SET read = $R_ED WHERE type = 1 AND _id = $sms_id;"
 		done
-	fi
+        fi
+        
 }
 
 callReport(){
-        # 执行查询并将结果逐行存储到变量
-        CALL_DB_PATH="$(echo "$config_conf" | egrep '^call_db_path=' | sed -n 's/call_db_path=//g;$p')"
-        if [ ! -f $CALL_DB_PATH ];then
-        	echo "$(date +%F_%T) 通话记录数据库不存在，请正确配置 $CALL_DB_PATH" >> "$MODDIR/log.log"
-        else
-        	sqlite3 -separator $'\t' "$CALL_DB_PATH" "SELECT _id, number, date, new FROM calls WHERE type = 3 AND new = 1 LIMIT 1;" | while IFS=$'\t' read -r call_id number date is_read; do
+# 执行查询并将结果逐行存储到变量
+	CALL_DB_PATH="$(echo "$config_conf" | egrep '^call_db_path=' | sed -n 's/call_db_path=//g;$p')"
+	if [ -f "$CALL_DB_PATH" ]; then
+		sqlite3 -separator $'\t' "$CALL_DB_PATH" "SELECT _id, number, date, new FROM calls WHERE type = 3 AND new = 1 LIMIT 1;" | while IFS=$'\t' read -r call_id number date is_read; do
 			# 将日期从毫秒转换为秒，并格式化为可读的日期格式
 			formatted_date=$(date -d @$((date / 1000)) "+%Y-%m-%d %H:%M:%S")
 
