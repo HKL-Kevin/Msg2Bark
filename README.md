@@ -9,22 +9,24 @@
 配置文件地址：`/data/adb/modules/Msg_2_Bark/config.conf`
 
 ```toml
-#所有配置参数修改即时生效，无需重启！！！日志文件log.log
+#所有配置参数修改即时生效，无需重启！！!
 
-# Bark服务器地址 +「/push」，最后面的「/push」是推送时调用的接口名称
+# 短信数据库路径，一般不需要改
+msg_db_path=/data/data/com.android.providers.telephony/databases/mmssms.db
+# 通话记录数据库路径，一般不需要改
+call_db_path=/data/data/com.android.providers.contacts/databases/calllog.db
+
+# bark推送总开关，0不推送/1推送
+bark_switch=0
+# Bark服务器地址，后面的"/push"是推送时调用的接口名称
 bark_url=https://api.day.app/push
-
 # Bark推送key,进入Bark应用内查看
 device_key=
 
-# APP图标，不需要改
-app_icon=https://images.app.goo.gl/b1sway3Ud6PkgUkWA
-
-# 短信数据库路径，一般不需要改，如果你的设备的短信数据库路径不在这里请自行搜索
-msg_db_path=/data/data/com.android.providers.telephony/databases/mmssms.db
-# 通话记录数据库路径，一般不需要改，如果你的设备的通话记录数据库路径不在这里请自行搜索
-call_db_path=/data/data/com.android.providers.contacts/databases/calllog.db
-
+# 企业微信群机器人推送总开关，0不推送/1推送
+wx_switch=0
+# 企业微信群机器人webhook
+wx_webhook=
 ```
 
 
